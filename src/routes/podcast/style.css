@@ -1,0 +1,10 @@
+.wrapper {
+  
+  width: 60vw;
+  margin: 0 auto;
+}
+
+.podcast-flex{
+  display:flex;
+  gap:2em;
+}
