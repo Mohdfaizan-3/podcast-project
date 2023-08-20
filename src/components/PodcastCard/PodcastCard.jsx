@@ -4,7 +4,7 @@ import "./style.css"
 const PodcastCard = ({id, title, displayImage}) => {
   return (
     <div className='podcast-card'>
-        <Link to={`podcast/${id}`}>
+        <Link to={`/podcasts/${id}`}>
             <div className='podcast-card'>
                 <img className="display-img-podcast" src={displayImage} alt="" />
                 <p className='title-podcast'>{title}</p>

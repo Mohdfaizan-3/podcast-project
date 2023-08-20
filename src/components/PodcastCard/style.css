@@ -22,6 +22,7 @@
 .podcast-card:hover{
     opacity: 1;
     transition: all 0.3s;
+    
 }
 
 .title-podcast {

@@ -20,6 +20,9 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
 
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -51,14 +54,14 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserFromEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-  return createUserWithEmailAndPassword(auth, email, password);
+  return  createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signInUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return;
+// export const signInUserWithEmailAndPassword = async (email, password) => {
+//   if (!email || !password) return;
 
-  return signInWithEmailAndPassword(auth, email, password);
-};
+//   return await signInWithEmailAndPassword(auth, email, password);
+// };
 
 export const getAuthUserDoc = async (user) => {
   return getDoc(doc(db, "users", user.uid));
@@ -70,6 +73,4 @@ export const authChangeEventListener = (callback) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+

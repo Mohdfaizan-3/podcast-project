@@ -7,6 +7,8 @@ import "./App.css";
 import Login from "./components/Login/Login";
 import Navigation from "./components/Navigation/Navigation";
 import PrivateRoute from "./components/PrivateRoute";
+import CreateEpisode from "./routes/Podcast Detail/CreateEpisode";
+import PodcastDetail from "./routes/Podcast Detail/PodcastDetail";
 import CreatePodcast from "./routes/createPodcast/CreatePodcast";
 import Podcast from "./routes/podcast/Podcast";
 import Profile from "./routes/profile/Profile";
@@ -17,9 +19,16 @@ const router = createBrowserRouter([
     element: <Navigation />,
     children: [
       {
-        path:"podcasts",
+        path: "podcasts",
         element: <Podcast />,
       },
+
+      {
+        path: "podcasts/:id",
+        element: <PodcastDetail />,
+      },
+
+     
       {
         path: "signup",
         element: <SignUp />,
@@ -38,6 +47,10 @@ const router = createBrowserRouter([
           {
             path: "start-podcast",
             element: <CreatePodcast />,
+          },
+          {
+            path: "podcasts/:id/create-episode",
+            element: <CreateEpisode />,
           },
         ],
       },
@@ -84,7 +97,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </>
   );
 }

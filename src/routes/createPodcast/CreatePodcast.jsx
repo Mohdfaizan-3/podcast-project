@@ -2,7 +2,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../utils/firebase.utils";
 import "./style.css";
@@ -16,8 +16,8 @@ const CreatePodcast = () => {
   const [formFeilds, setFormFeilds] = useState(defaultFormFeilds);
   const { title, description, bannerImg, smallImg } = formFeilds;
   const [isSubmitting, setSubmitting] = useState(false);
-
   const currentUser = useSelector((state) => state.user.user);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormFeilds({
@@ -41,7 +41,7 @@ const CreatePodcast = () => {
 
       const displayImageRef = ref(
         storage,
-        `podcast/${currentUser.displayName}/${Date.now()}`
+        `podcast/${currentUser.uid}/${Date.now()}`
       );
       await uploadBytes(displayImageRef, smallImg);
       const displayImageUrl = await getDownloadURL(displayImageRef);
@@ -52,10 +52,11 @@ const CreatePodcast = () => {
         bannerImage: bannerImageUrl,
         displayImage: displayImageUrl,
         createdBy: currentUser.displayName,
+        uid:currentUser.uid
       };
       const docRef = await addDoc(collection(db, "podcasts"), podcastData);
       toast.success("created");
-    //   Navigate(`/podcast/${docRef}`);
+      // Navigate(`/podcast/${docRef}`);
     } catch (error) {
       console.error(error);
       toast.error(error.message);

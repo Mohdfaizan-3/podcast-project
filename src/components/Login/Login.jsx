@@ -1,12 +1,10 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { userAction } from "../../store/userSlice";
-import {
-  getAuthUserDoc,
-  signInUserWithEmailAndPassword,
-} from "../../utils/firebase.utils";
+import { auth, getAuthUserDoc } from "../../utils/firebase.utils";
 import "./style.css";
 
 const defaultFormFeilds = {
@@ -37,7 +35,12 @@ const Login = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const { user } = await signInUserWithEmailAndPassword(email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
       const userDoc = await getAuthUserDoc(user);
       const userData = userDoc.data();
       dispatch(

@@ -1,3 +1,7 @@
+*{
+  color:var(--white);
+}
+
 .wrapper {
   
   width: 60vw;
@@ -8,3 +12,20 @@
   display:flex;
   gap:2em;
 }
+
+.search-box {
+  text-align:start;
+  width: 100%;
+  padding: 14px 20px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: var(--theme);
+  box-sizing: border-box;
+  color: var(--white);
+  font-size: 0.8rem;
+  color: gray;
+}
+
+
