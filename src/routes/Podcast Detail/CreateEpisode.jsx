@@ -33,6 +33,7 @@ const CreateEpisode = () => {
       const audioUrl = await getDownloadURL(audioRef);
 
       const episodeData = {
+        id:Date.now(),
         title,
         description,
         audio: audioUrl,
@@ -74,10 +75,9 @@ const CreateEpisode = () => {
       });
     }
   };
-  console.log(formFeilds);
   return (
     <div className="create-podcast-container">
-      <h2>create a podcast</h2>
+      <h2>create a Episode</h2>
       <form onSubmit={handleSubmit}>
         <input
           autoComplete="true"
