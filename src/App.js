@@ -1,6 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -19,8 +18,8 @@ const router = createBrowserRouter([
     element: <Navigation />,
     children: [
       {
-          index:true,
-          element:<Podcast/>
+        index: true,
+        element: <Podcast />,
       },
       {
         path: "podcasts",
@@ -32,7 +31,6 @@ const router = createBrowserRouter([
         element: <PodcastDetail />,
       },
 
-     
       {
         path: "signup",
         element: <SignUp />,
@@ -63,30 +61,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state.user.user);
-  console.log("selector app", selector);
-  //  signOutUser();
-  //useEffect(() => {
-  //   const unsubscribe = authChangeEventListener(async (user) => {
-  //     if (user) {
-  //       const userDoc =  getAuthUserDoc(user);
-
-  //         const userData = await userDoc.data();
-  //         console.log('userData',userData)
-  //         dispatch(
-  //           userAction.setUser({
-  //             email: userData.email,
-  //             displayName: userData.displayName,
-  //           })
-  //         );
-
-  //     }
-  //   });
-
-  //   return unsubscribe;
-  // }, []);
-
   return (
     <>
       <ToastContainer

@@ -2,7 +2,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../utils/firebase.utils";
 
@@ -15,13 +15,15 @@ const CreateEpisode = () => {
   const [formFeilds, setFormFeilds] = useState(defaultFormFeilds);
   const { title, description, audioFile } = formFeilds;
   const [isSubmitting, setSubmitting] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const currentUser = useSelector((state) => state.user.user);
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    setUploading(true);
 
     try {
       const audioRef = ref(
@@ -30,23 +32,27 @@ const CreateEpisode = () => {
       );
 
       await uploadBytes(audioRef, audioFile);
+      toast.success("file uploading");
       const audioUrl = await getDownloadURL(audioRef);
-
+      toast.success("file uploaded");
       const episodeData = {
-        id:Date.now(),
+        id: Date.now(),
         title,
         description,
         audio: audioUrl,
       };
 
-      const docRef = await addDoc(collection(db, "podcasts",id,"episodes"), episodeData);
+      const docRef = await addDoc(
+        collection(db, "podcasts", id, "episodes"),
+        episodeData
+      );
       toast.success("created");
       setSubmitting(false);
+      setUploading(false);
 
-      navigate(`/podcasts/${id}`)
+      navigate(`/podcasts/${id}`);
 
       setFormFeilds(defaultFormFeilds);
-
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -82,7 +88,7 @@ const CreateEpisode = () => {
         <input
           autoComplete="true"
           type="text"
-          placeholder="enter the name"
+          placeholder="Episode Title"
           onChange={handleChange}
           value={title}
           required
@@ -120,8 +126,11 @@ const CreateEpisode = () => {
           required
         />
 
-        <button type="submit" disabled={isSubmitting || audioFile === null}>
-          {!isSubmitting ? "create now" : "submitting..."}
+        {uploading && <p>Uploading audio files...</p>}
+        {isSubmitting && !uploading && <p>audio uploaded successfully!</p>}
+
+        <button type="submit" disabled={isSubmitting || uploading}>
+          {!isSubmitting && !uploading ? "Create Now" : "Submitting..."}
         </button>
       </form>
     </div>

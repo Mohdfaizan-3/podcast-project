@@ -103,7 +103,7 @@ const Profile = () => {
           id="displayName"
         />
         <label htmlFor="user-input-image" className="input">
-          {userData.picture === null ? (
+          {userData.picture === undefined || userData?.picture === null ? (
             <span
               style={{ fontWeight: "bold", fontSize: "1rem", color: "red" }}
             >

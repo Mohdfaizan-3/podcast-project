@@ -1,7 +1,6 @@
 .details-wrapper {
   margin: 0 5em;
   padding: 2em;
-  border: 3px solid white;
 }
 
 .banner-img {
@@ -12,7 +11,7 @@
     rgba(58, 129, 191, 0.3) 1.63%,
     rgba(65, 48, 90, 0.009) 148.18%
   );
-  object-fit: cover;
+  object-fit:cover;
   border-radius: 20px;
   padding: 0.5em;
 }

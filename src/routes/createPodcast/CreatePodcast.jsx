@@ -35,13 +35,12 @@ const CreatePodcast = () => {
         storage,
         `podcasts/${currentUser.uid}/${Date.now()}`
       );
-
       await uploadBytes(bannerImageRef, bannerImg);
       const bannerImageUrl = await getDownloadURL(bannerImageRef);
 
       const displayImageRef = ref(
         storage,
-        `podcast/${currentUser.uid}/${Date.now()}`
+        `podcasts/${currentUser.uid}/${Date.now()}`
       );
       await uploadBytes(displayImageRef, smallImg);
       const displayImageUrl = await getDownloadURL(displayImageRef);
@@ -56,6 +55,7 @@ const CreatePodcast = () => {
       };
       const docRef = await addDoc(collection(db, "podcasts"), podcastData);
       toast.success("created");
+      setFormFeilds(defaultFormFeilds);
       // Navigate(`/podcast/${docRef}`);
     } catch (error) {
       console.error(error);
@@ -83,7 +83,7 @@ const CreatePodcast = () => {
         <input
           autoComplete="true"
           type="text"
-          placeholder="enter the name"
+          placeholder="Title"
           onChange={handleChange}
           value={title}
           required

@@ -46,9 +46,13 @@ const PodcastDetail = () => {
 
     getEpisodesData();
   }, [id]);
+
   const handleClick = (file) => {
     setPlayingFile(file);
   };
+
+  const reversedEpisodeList = episodes.slice().reverse();
+
   return (
     <div>
       {podcast?.id && (
@@ -69,9 +73,9 @@ const PodcastDetail = () => {
           <img className="banner-img" src={podcast.bannerImage} alt="banner" />
           <p className="podcast-description">{podcast.description}</p>
           <h2>Episodes</h2>
-          {episodes.length > 0 ? (
+          {reversedEpisodeList.length > 0 ? (
             <ol style={{ padding: "2em", margin: "1em" }}>
-              {episodes.map((episode, index) => {
+              {reversedEpisodeList.map((episode, index) => {
                 return (
                   <EpisodeDetails
                     key={episode.id}
