@@ -1,20 +1,13 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import { signOutUser } from "../../utils/firebase.utils";
 import classes from "./navigation.module.css";
 const Navigation = () => {
-  //   const `activeStyles` = {
-  //     fontWeight: "bold",
-  //     textDecoration: "underline",
-  //     color: "var(--white)",
-  //   };
-
   const selector = useSelector((state) => state.user.user);
 
-  const dispatch = useDispatch();
   return (
-    <div>
+    <>
       <header>
         <nav className={classes.navbar}>
           <div className={classes.gradient}></div>
@@ -31,9 +24,7 @@ const Navigation = () => {
                   sign up
                 </NavLink>
               ) : (
-                <NavLink to="/" onClick={signOutUser()
-                
-                }>
+                <NavLink to="/" onClick={signOutUser()}>
                   sign out
                 </NavLink>
               )}
@@ -68,7 +59,7 @@ const Navigation = () => {
       <main>
         <Outlet />
       </main>
-    </div>
+    </>
   );
 };
 

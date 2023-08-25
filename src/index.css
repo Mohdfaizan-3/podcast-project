@@ -23,7 +23,7 @@ code {
 
 * {
   box-sizing: border-box;
-}
+ }
 
 a {
   text-decoration: none;
@@ -34,3 +34,4 @@ a {
   background-color: orangered;
   color: white;
 }
+

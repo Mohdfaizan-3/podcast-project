@@ -6,8 +6,6 @@
   color: var(--white);
 }
 
-
-
 input {
   width: 100%;
   padding: 14px 20px;
@@ -33,6 +31,6 @@ button {
 }
 
 button:hover {
-    color: var(--theme);
-    background-color: var(--white);
+  color: var(--theme);
+  background-color: var(--white);
 }

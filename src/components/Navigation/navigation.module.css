@@ -4,6 +4,7 @@
   align-items: center;
   padding: 1em;
 }
+
 .navlinks {
   display: flex;
   justify-content: center;
@@ -31,3 +32,35 @@
   z-index: -1;
   top:-100px;
 }
+
+
+
+
+@media (max-width:840px) {
+  .navbar {
+    padding: 1em;
+  }
+
+  .gradient {
+    width: 370px;
+  }
+
+  .navlinks {
+    padding: 0;
+  }
+}
+
+@media (width:280px) {
+  .navbar {
+    padding: 1em;
+  }
+
+  .gradient {
+    width: 220px;
+  }
+
+  .navlinks {
+    padding: 0;
+  }
+}
+
